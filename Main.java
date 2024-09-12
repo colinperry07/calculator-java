@@ -18,13 +18,13 @@ public class Main {
 		    Double number1 = null, number2;
 		    String ccText;
 		    
-		    boolean resultFound = false;
+		    boolean num1Found = false;
 		    
-		    while (!resultFound) {
+		    while (!num1Found) {
 		    	if (!calcLooped) {
 			    	System.out.println("Enter first number:");
 				    number1 = input.nextDouble();
-				    resultFound = true;
+				    num1Found = true;
 			    } else {
 			    	System.out.println("Enter new number or ans (for previous answer):");
 			    	
@@ -42,7 +42,7 @@ public class Main {
 				    	case "ans":
 				    		number1 = result;
 				    		System.out.println(number1);
-				    		resultFound = true;
+				    		num1Found = true;
 			    	}
 			    }
 		    }
