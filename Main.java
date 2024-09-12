@@ -10,6 +10,7 @@ public class Main {
 		boolean calcOn = true;
 		boolean calcLooped = false;
 		Double result = null;
+		boolean isAnswered = false;
 		
 		while (calcOn) {
 			// Defines the variables
@@ -34,7 +35,7 @@ public class Main {
 				    		try {
 				    			number1 = Double.parseDouble(userInput); // Converts the string input to a double
 				    		} catch (Exception e){ // if anything except for Ans/ANs/ANS/ans, will give error
-				    			System.out.println("Invalid Input!");
+				    			System.out.println("Something went wrong...");
 				    			break;
 				    		}
 				    		break;
@@ -48,7 +49,7 @@ public class Main {
 		    
 		    
 		    System.out.println("Choose an operator: +, -, *, or /");
-		    operator = input.next().charAt(0);
+		    operator = input.next().charAt(0); // Only returns token of the first character in the input
 		    
 		    System.out.println("Enter second number:");
 		    number2 = input.nextDouble();
@@ -76,20 +77,29 @@ public class Main {
 			    	break;
 		    }
 		    
-		    System.out.println("Continue? (y or n)");
-		    ccText = input.next();
-		    
-		    switch (ccText.toLowerCase()) {
-		    default:
-		    	System.out.println("Answer unrecognized, shutting down...");
-		    	calcOn = false;
-		    case "y":
-		    	calcLooped = true;
-		    	break;
-		    case "n":
-		    	System.out.println("Calculator shutting down...");
-		    	calcOn = false;
+		    while (!isAnswered) {
+		    	System.out.println("Continue? (y or n)");
+			    ccText = input.next();
+		    	switch (ccText.toLowerCase()) {
+			    default: 
+			    	// If the user enters an invalid response, the question repeats until they enter a valid response
+			    	System.out.println("Answer unrecognized, please enter a valid response...");
+			    	isAnswered = false;
+			    	break;
+			    case "y":
+			    	// If the user wishes to continue, the program will loop back around with a new input prompt
+			    	calcLooped = true;
+			    	isAnswered = true;
+			    	break;
+			    case "n":
+			    	// If the user does not wish to continue, the program stops
+			    	System.out.println("Calculator shutting down...");
+			    	isAnswered = true;
+			    	calcOn = false;
+			    	break;
+			    }
 		    }
+		    
 		}
 	    
 		input.close();
