@@ -1,5 +1,6 @@
 package main;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -11,10 +12,12 @@ public class Main {
 		
 		while (calcOn) {
 			char operator;
-		    Double number1 = null, number2;
 		    String ccText;
 		    boolean isAnswered = false; // Variable that defines if the end prompt has been answered
 		    boolean num1Found = false;
+		    boolean num2Found = false;
+		    Double number1 = null;
+		    Double number2 = null; 
 		    
 		    while (!num1Found) {
 		    	if (!calcLooped) { // During the calculators first run, this runs
@@ -47,10 +50,20 @@ public class Main {
 		    
 		    
 		    System.out.println("Choose an operator: +, -, *, or /");
-		    operator = input.next().charAt(0); // Only returns token of the first character in the input
+		    operator = input.next().charAt(0); // .charAt(0) only returns token of the first character in the input
+
 		    
-		    System.out.println("Enter second number:");
-		    number2 = input.nextDouble();
+		    while (!num2Found) {    	
+		    	System.out.println("Enter second number:");
+				try {
+	    			number2 = input.nextDouble();
+	    			num2Found = true;
+	    		} catch (InputMismatchException e){
+	    			System.out.println("Something went wrong...");
+	    			input.next();
+	    		}
+
+		    }
 		    
 		    switch (operator) {
 		    
