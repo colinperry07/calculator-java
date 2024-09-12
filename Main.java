@@ -3,46 +3,44 @@ package main;
 import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) {
-		// Creates a new object using the java.util.Scanner package
-		// (System.in) references the InputStreamReader class for the Scanner class object
+	public static void main(String[] args) { 
 		Scanner input = new Scanner(System.in); 
 		boolean calcOn = true;
 		boolean calcLooped = false;
-		Double result = null;
-		boolean isAnswered = false;
+		Double result = null; // Defines the result of the calculators previous equation
 		
 		while (calcOn) {
-			// Defines the variables
 			char operator;
 		    Double number1 = null, number2;
 		    String ccText;
-		    
+		    boolean isAnswered = false; // Variable that defines if the end prompt has been answered
 		    boolean num1Found = false;
 		    
 		    while (!num1Found) {
-		    	if (!calcLooped) {
+		    	if (!calcLooped) { // During the calculators first run, this runs
 			    	System.out.println("Enter first number:");
 				    number1 = input.nextDouble();
 				    num1Found = true;
-			    } else {
+			    } else { // This code runs after the calculators first run
 			    	System.out.println("Enter new number or ans (for previous answer):");
 			    	
 			    	String userInput = input.next(); // Takes input as a string
 			    	
 			    	switch (userInput.toLowerCase()) {
-				    	default:
+				    	default: // Runs if user inputs a number and not "ans"
 				    		try {
-				    			number1 = Double.parseDouble(userInput); // Converts the string input to a double
-				    		} catch (Exception e){ // if anything except for Ans/ANs/ANS/ans, will give error
+				    			number1 = Double.parseDouble(userInput);// Converts the string input to a double
+				    		} catch (Exception e){
 				    			System.out.println("Something went wrong...");
 				    			break;
 				    		}
+				    		num1Found = true;
 				    		break;
 				    	case "ans":
-				    		number1 = result;
+				    		number1 = result; 
 				    		System.out.println(number1);
-				    		num1Found = true;
+				    		num1Found = true; // Disables the loop to move on to the next prompt
+				    		break;
 			    	}
 			    }
 		    }
@@ -77,7 +75,7 @@ public class Main {
 			    	break;
 		    }
 		    
-		    while (!isAnswered) {
+		    while (!isAnswered) { // Checks to see if the program can run again
 		    	System.out.println("Continue? (y or n)");
 			    ccText = input.next();
 		    	switch (ccText.toLowerCase()) {
@@ -87,8 +85,7 @@ public class Main {
 			    	isAnswered = false;
 			    	break;
 			    case "y":
-			    	// If the user wishes to continue, the program will loop back around with a new input prompt
-			    	calcLooped = true;
+			    	calcLooped = true; // Identifies that this will make the calculator looped
 			    	isAnswered = true;
 			    	break;
 			    case "n":
